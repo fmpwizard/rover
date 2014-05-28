@@ -68,14 +68,9 @@ func sendArduinoCommand(command string, argument uint32, serialPort io.ReadWrite
 	if err != nil {
 		return err
 	}
-	cmd := new(bytes.Buffer)
-	err = binary.Write(cmd, binary.LittleEndian, command)
-	if err != nil {
-		return err
-	}
 
 	// Transmit command and argument down the pipe.
-	for _, v := range [][]byte{cmd.Bytes(), value.Bytes()} {
+	for _, v := range [][]byte{[]byte(command), value.Bytes()} {
 		_, err = serialPort.Write(v)
 		if err != nil {
 			return err
