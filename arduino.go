@@ -3,9 +3,8 @@ package main
 //Most code on this page is from http://reprage.com/post/using-golang-to-connect-raspberrypi-and-arduino/
 
 import (
-	"bytes"
-	"encoding/binary"
 	"errors"
+	"fmt"
 	"github.com/huin/goserial"
 	"io"
 	"io/ioutil"
@@ -63,15 +62,17 @@ func sendArduinoCommand(command string, argument uint32, serialPort io.ReadWrite
 	}
 
 	// Package argument for transmission
-	value := new(bytes.Buffer)
-	err := binary.Write(value, binary.LittleEndian, argument)
-	if err != nil {
-		return err
-	}
+	// value := new(bytes.Buffer)
+	// err := binary.Write(value, binary.LittleEndian, argument)
+	// if err != nil {
+	// 	return err
+	// }
+
+	cmd := fmt.Sprintf("%s %+v", command, argument)
 
 	// Transmit command and argument down the pipe.
-	for _, v := range [][]byte{[]byte(command), value.Bytes()} {
-		_, err = serialPort.Write(v)
+	for _, v := range [][]byte{[]byte(cmd)} {
+		_, err := serialPort.Write(v)
 		if err != nil {
 			return err
 		}
