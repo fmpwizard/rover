@@ -69,7 +69,7 @@ func sendArduinoCommand(command string, argument uint32, serialPort io.ReadWrite
 		return err
 	}
 	cmd := new(bytes.Buffer)
-	err = binary.Write(value, binary.LittleEndian, command)
+	err = binary.Write(cmd, binary.LittleEndian, command)
 	if err != nil {
 		return err
 	}
