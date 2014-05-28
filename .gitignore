@@ -21,3 +21,7 @@ _testmain.go
 
 *.exe
 *.test
+rover
+rover.sublime-project
+rover.sublime-workspace
+
