@@ -8,6 +8,7 @@ import (
 
 func main() {
 	http.HandleFunc("/rover", roverHandler)
+	http.Handle("/", http.FileServer(http.Dir("./webapp")))
 	http.ListenAndServe(":7070", nil)
 }
 
