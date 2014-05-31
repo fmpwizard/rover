@@ -3,6 +3,6 @@ function moveRover(direction){
 	  url: "/rover?c=" + direction + "&v=1",
 	  context: document.body
 	}).done(function() {
-	  alert("made it");
+	  console.log("made it");
 	});
 };
